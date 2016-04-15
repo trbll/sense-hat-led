@@ -1,4 +1,4 @@
-Control a Raspberry Pi Sense HAT LED Display
+=== Control a Raspberry Pi Sense HAT LED Display with Node
 
 Fork of Jochen Hinrichsen's sense hat library with synchronous and asynchronous methods using callbacks.  The hope is beginners can start with the synchronous and switch to callbacks & then to Jochen's promises.
 
