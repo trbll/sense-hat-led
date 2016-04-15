@@ -19,4 +19,18 @@ const sense = require(sense-hat-matrix);
 sense.setPixel(0,7,[244,0,0]);
 ```
 
-API should follow the sense hat pthon library see (http://pythonhosted.org/sense-hat/api/#led-matrix). except all methods are camelCase
+API should follow the sense hat pthon library see (http://pythonhosted.org/sense-hat/api/#led-matrix). except all methods are camelCase add callback as the last parameter of the asynchronous methods.
+
+The synchronous functions are methods of the sync object.
+
+example:
+
+"use strict";
+const sense = require(sense-hat-matrix).sync;
+
+sense.setPixel(0,7,[244,0,0]);
+
+=== To Do:
+
+All of the python sense hat led matrix api has been ported except for low_light, gamma & gamma_reset those are next
+
