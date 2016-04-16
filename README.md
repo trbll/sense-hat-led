@@ -1,6 +1,6 @@
 # Control a Raspberry Pi Sense HAT LED Display with Node
 
-Fork of Jochen Hinrichsen's sense hat library with synchronous and asynchronous methods using node style callbacks.  The hope is beginners can start with the synchronous and switch to callbacks & then to Jochen's promises at:
+Fork of Jochen Hinrichsen's sense hat library with your choice of synchronous or asynchronous methods using node style callbacks.  The hope is beginners can start with the synchronous and switch to callbacks & then to Jochen's promises at:
 
 https://github.com/jhinrichsen/sense-hat-matrix
 
@@ -394,7 +394,7 @@ sense.flashMessage("One small step for Pi!", 0.2);
 - - -
 ### sleep
 
-NOTE: Sycronous only. These calls will block execution of all JavaScript by halting Node.js' event loop!!
+NOTE: Synchronous only. These calls will block execution of all JavaScript by halting Node.js' event loop!!
 
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
