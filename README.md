@@ -432,7 +432,7 @@ function flashRed(){
 // or
 
 function flashGreenThenDoSomething(callback){
-  sense.clear([0, 0, 255],);
+  sense.clear([0, 0, 255]);
   setTimeout(sense.clear, 100, callback);
 }
 
@@ -441,9 +441,11 @@ function flashGreenThenDoSomething(callback){
 function flashBlueThenDoSomething(callback){
   sense.clear([0, 255, 0], (err) => {
     if (err) return console.error(err.message);
-    setTimeout(() => sense.clear((err) => {
-      if (err) return console.error(err.message);
-      callback(null);
+    setTimeout(() => {
+      sense.clear((err) => {
+        if (err) return console.error(err.message);
+        callback(null);
+      }
     }), 100);
   });
 }
