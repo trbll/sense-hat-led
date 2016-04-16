@@ -219,10 +219,21 @@ Returned / callback data type | Explanation
 Array | Returns An array of `[R, G, B]` representing the colour of an individual LED matrix pixel at the specified X-Y coordinate.
 
 ```javascript
-var sense = require("sense-hat-led");
+var sense = require("sense-hat-led").sync;
 
 var topLeftPixel = sense.getPixel(0, 0);
 ```
+async:
+
+```javascript
+var sense = require("sense-hat-led");
+
+sense.getPixel(0, 0 , (err, topLeftPixel)=>{
+  console.log(topLeftPixel[0]); // red value
+});
+```
+
+
 
 Note: Please read the note under `getPixels`
 - - -
