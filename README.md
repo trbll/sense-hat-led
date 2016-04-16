@@ -24,11 +24,6 @@ sense.setPixel(0, 7, [244,0,0], (err) => {
   }
 });
 
-
-
-
-
-
 ```
 
 API should follow the sense hat pthon library see (http://pythonhosted.org/sense-hat/api/#led-matrix). except all methods are camelCase and an added callback as the last parameter of the asynchronous methods. The callbacks are passed arguments (err, data), where data is the return value (if any) of the asynchronous version of the function.
@@ -426,12 +421,31 @@ function flashRed(){
 ```
 asynchronous alternative (recommended)
 
-``javascript
+```javascript
 var sense = require("sense-hat-led");
 
 function flashRed(){
   sense.clear([255, 0, 0]);
   setTimeout(sense.clear, 100);
+}
+
+// or
+
+function flashGreenThenDoSomething(callback){
+  sense.clear([0, 0, 255],);
+  setTimeout(sense.clear, 100, callback);
+}
+
+// or with error checking
+
+function flashBlueThenDoSomething(callback){
+  sense.clear([0, 255, 0], (err) => {
+    if (err) return console.error(err.message);
+    setTimeout(() => sense.clear((err) => {
+      if (err) return console.error(err.message);
+      callback(null);
+    }), 100);
+  });
 }
 
 
