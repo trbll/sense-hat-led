@@ -285,7 +285,7 @@ Sets the entire LED matrix to a single colour, defaults to blank / off.
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
 `colour` | Array | `(r, g, b)` | An array containing the RGB (red, green, blue) values of the colour. Each element must be an integer between 0 and 255. Defaults to `(0, 0, 0)`.
-Alternatively, the RGB values can be passed individually:|||
+Alternatively, the RGB values can be passed individually:
 `r` | Integer |  `0 - 255` | The Red element of the colour.
 `g` | Integer |  `0 - 255` | The Green element of the colour.
 `b` | Integer |  `0 - 255` | The Blue element of the colour.
