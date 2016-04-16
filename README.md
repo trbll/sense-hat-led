@@ -114,7 +114,7 @@ Updates the entire LED matrix based on a 64 length array of pixel values.
 
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
-`pixelArray` | Array | `[[R, G, B] * 64]` | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue). Each R-G-B element must be an integer between 0 and 255.
+`pixelArray` | Array | `[[R,G,B]*64]` | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue). Each R-G-B element must be an integer between 0 and 255.
 
 Returned / callback data type | Explanation
 --- | ---
@@ -175,14 +175,14 @@ Sets an individual LED matrix pixel at the specified X-Y coordinate to the speci
 
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
-`x` | Integer | `0 - 7` | 0 is on the left, 7 on the right.
-`y` | Integer |  `0 - 7` | 0 is at the top, 7 at the bottom.
+`x` | Integer | `0-7` | 0 is on the left, 7 on the right.
+`y` | Integer |  `0-7` | 0 is at the top, 7 at the bottom.
 Colour can either be passed as an RGB array: |||
 `pixel` | Array |  `(r, g, b)` | Each element must be an integer between 0 and 255.
 Or three separate values for red, green and blue: |||
-`r` | Integer |  `0 - 255` | The Red element of the pixel.
-`g` | Integer |  `0 - 255` | The Green element of the pixel.
-`b` | Integer |  `0 - 255` | The Blue element of the pixel.
+`r` | Integer |  `0-255` | The Red element of the pixel.
+`g` | Integer |  `0-255` | The Green element of the pixel.
+`b` | Integer |  `0-255` | The Blue element of the pixel.
 
 Returned / callback data type | Explanation
 --- | ---
