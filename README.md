@@ -402,6 +402,8 @@ sense.flashMessage("One small step for Pi!", 0.2);
 
 NOTE: Synchronous only. These calls will block execution of all JavaScript by halting Node.js' event loop!!
 
+for the asynchronous functions use setTimeout instead.
+
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
 `time` | Number | Any number. | the time in seconds to pause
