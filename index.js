@@ -663,6 +663,7 @@ module.exports = {
     setRotation(r, true);
   },
   sync: {
+    sleep: sleep,
     clear: clearSync,
     getPixel: getPixelSync,
     setPixel: setPixelSync,

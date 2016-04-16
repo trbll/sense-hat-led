@@ -1,0 +1,311 @@
+# Control a Raspberry Pi Sense HAT LED Display with Node
+
+Fork of Jochen Hinrichsen's sense hat library with synchronous and asynchronous methods using callbacks.  The hope is beginners can start with the synchronous and switch to callbacks & then to Jochen's promises.
+
+### Install:
+
+Install the Sense HAT software by opening a Terminal window and entering the following commands (while connected to the Internet):
+
+`npm install sense-hat-led`
+
+### Usage:
+
+example:
+
+```
+"use strict";
+const sense = require("sense-hat-led");
+
+sense.setPixel(0,7,[244,0,0]);
+```
+
+API should follow the sense hat pthon library see (http://pythonhosted.org/sense-hat/api/#led-matrix). except all methods are camelCase add callback as the last parameter of the asynchronous methods.
+
+The synchronous functions are methods of the sync object.
+
+example:
+```
+"use strict";
+const sense = require("sense-hat-led").sync;
+
+sense.setPixel(0,7,[244,0,0]);
+```
+### To Do:
+
+All of the python sense hat led matrix api has been ported except for low_light, gamma & gamma_reset those are next
+
+
+## Sense HAT LED MATRIX API Reference
+
+### setRotation
+
+If you're using the Pi upside down or sideways you can use this function to correct the orientation of the image being shown.
+
+Parameter | Type | Valid values | Explanation
+--- | --- | --- | ---
+`r` | Integer | `0` `90` `180` `270` | The angle to rotate the LED matrix though. `0` is with the Raspberry Pi HDMI port facing downwards.
+`redraw` | Boolean | `true` `false` | Whether or not to redraw what is already being displayed on the LED matrix. Defaults to `true`
+
+Returned type | Explanation
+--- | ---
+None |
+
+```
+var sense = require("sense-hat-led");
+
+sense.seRrotation(180);
+# alternatives
+sense.rotation = 180;
+```
+- - -
+### flipH
+
+Flips the image on the LED matrix horizontally.
+
+Parameter | Type | Valid values | Explanation
+--- | --- | --- | ---
+`redraw` | Boolean | `true` `false` | Whether or not to redraw what is already being displayed on the LED matrix. Defaults to `true`
+
+Returned type | Explanation
+--- | ---
+Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the flipped image.
+
+```
+var sense = require("sense-hat-led");
+
+sense.flipH();
+```
+- - -
+### flipV
+
+Flips the image on the LED matrix vertically.
+
+Parameter | Type | Valid values | Explanation
+--- | --- | --- | ---
+`redraw` | Boolean | `true` `false` | Whether or not to redraw what is already being displayed on the LED matrix when flipped. Defaults to `true`
+
+Returned type | Explanation
+--- | ---
+Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the flipped image.
+
+```
+var sense = require("sense-hat-led");
+
+sense.flipV();
+```
+- - -
+### setPixels
+
+Updates the entire LED matrix based on a 64 length array of pixel values.
+
+Parameter | Type | Valid values | Explanation
+--- | --- | --- | ---
+`pixelArray` | Array | `[[R, G, B] * 64]` | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue). Each R-G-B element must be an integer between 0 and 255.
+
+Returned type | Explanation
+--- | ---
+None |
+
+```
+var sense = require("sense-hat-led");
+
+var X = [255, 0, 0];  // Red
+var O = [255, 255, 255];  // White
+
+var questionMark = [
+O, O, O, X, X, O, O, O,
+O, O, X, O, O, X, O, O,
+O, O, O, O, O, X, O, O,
+O, O, O, O, X, O, O, O,
+O, O, O, X, O, O, O, O,
+O, O, O, X, O, O, O, O,
+O, O, O, O, O, O, O, O,
+O, O, O, X, O, O, O, O
+];
+
+sense.setPixels(questionMark);
+```
+- - -
+### getPixels
+
+Returned type | Explanation
+--- | ---
+Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the currently displayed image.
+
+```
+var sense = require("sense-hat-led");
+var pixelArray = sense.getPixels();
+```
+
+Note: You will notice that the pixel values you pass into `setPixels` sometimes change when you read them back with  `getPixels`. This is because we specify each pixel element as 8 bit numbers (0 to 255) but when they're passed into the Linux frame buffer for the LED matrix the numbers are bit shifted down to fit into RGB 565. 5 bits for red, 6 bits for green and 5 bits for blue. The loss of binary precision when performing this conversion (3 bits lost for red, 2 for green and 3 for blue) accounts for the discrepancies you see.
+
+The `getPixels` function provides a correct representation of how the pixels end up in frame buffer memory after you've called `setPixels`.
+- - -
+### setPixel
+
+Sets an individual LED matrix pixel at the specified X-Y coordinate to the specified colour.
+
+Parameter | Type | Valid values | Explanation
+--- | --- | --- | ---
+`x` | Integer | `0 - 7` | 0 is on the left, 7 on the right.
+`y` | Integer |  `0 - 7` | 0 is at the top, 7 at the bottom.
+Colour can either be passed as an RGB array: |||
+`pixel` | Array |  `(r, g, b)` | Each element must be an integer between 0 and 255.
+Or three separate values for red, green and blue: |||
+`r` | Integer |  `0 - 255` | The Red element of the pixel.
+`g` | Integer |  `0 - 255` | The Green element of the pixel.
+`b` | Integer |  `0 - 255` | The Blue element of the pixel.
+
+Returned type | Explanation
+--- | ---
+None |
+
+```
+var sense = require("sense-hat-led").sync;
+
+// examples using (x, y, r, g, b)
+
+sense.setPixel(0, 0, 255, 0, 0);
+sense.setPixel(0, 7, 0, 255, 0);
+sense.setPixel(7, 0, 0, 0, 255);
+sense.setPixel(7, 7, 255, 0, 255);
+
+red = [255, 0, 0];
+green = [0, 255, 0];
+blue = [0, 0, 255];
+
+// examples using (x, y, pixel)
+
+sense.setPixel(0, 0, red);
+sense.setPixel(0, 0, green);
+sense.setPixel(0, 0, blue);
+```
+- - -
+### getPixel
+
+Parameter | Type | Valid values | Explanation
+--- | --- | --- | ---
+`x` | Integer |  `0 - 7` | 0 is on the left, 7 on the right.
+`y` | Integer |  `0 - 7` | 0 is at the top, 7 at the bottom.
+
+Returned type | Explanation
+--- | ---
+Array | Returns An array of `[R, G, B]` representing the colour of an individual LED matrix pixel at the specified X-Y coordinate.
+
+```
+var sense = require("sense-hat-led");
+
+var topLeftPixel = sense.getPixel(0, 0);
+```
+
+Note: Please read the note under `getPixels`
+- - -
+### loadImage
+
+Loads an image file, converts it to RGB format and displays it on the LED matrix. The image must be 8 x 8 pixels in size.
+
+Parameter | Type | Valid values | Explanation
+--- | --- | --- | ---
+`filePath` | String | Any valid file path. | The file system path to the image file to load.
+`redraw` | Boolean | `true` `false` | Whether or not to redraw the loaded image file on the LED matrix. Defaults to `true`
+
+```
+var sense = require("sense-hat-led");
+
+sense.loadImage("space_invader.png");
+```
+
+Returned type | Explanation
+--- | ---
+Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the loaded image after RGB conversion.
+
+```
+var sense = require("sense-hat-led").sync;
+
+var invaderPixels = sense.loadImage("space_invader.png", redraw=false);
+```
+- - -
+### clear
+
+Sets the entire LED matrix to a single colour, defaults to blank / off.
+
+Parameter | Type | Valid values | Explanation
+--- | --- | --- | ---
+`colour` | Array | `(r, g, b)` | An array containing the RGB (red, green, blue) values of the colour. Each element must be an integer between 0 and 255. Defaults to `(0, 0, 0)`.
+Alternatively, the RGB values can be passed individually:|||
+`r` | Integer |  `0 - 255` | The Red element of the colour.
+`g` | Integer |  `0 - 255` | The Green element of the colour.
+`b` | Integer |  `0 - 255` | The Blue element of the colour.
+
+```
+var sense = require("sense-hat-led").sync;
+
+var red = [255, 0, 0];
+
+sense.clear();  // no arguments defaults to off
+sense.clear(red) // passing in an RGB array
+sense.clear(255, 255, 255);  // passing in r, g and b values of a colour
+```
+- - -
+### showMessage
+
+Scrolls a text message from right to left across the LED matrix and at the specified speed, in the specified colour and background colour.
+
+Parameter | Type | Valid values | Explanation
+--- | --- | --- | ---
+`textString` | String | Any text string. | The message to scroll.
+`scrollSpeed` | Float | Any floating point number. | The speed at which the text should scroll. This value represents the time paused for between shifting the text to the left by one column of pixels. Defaults to `0.1`
+`textColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the text. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
+`backColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
+
+Returned type | Explanation
+--- | ---
+None |
+
+```
+var sense = require("sense-hat-led");
+sense.showMessage("One small step for Pi!", textColour=[255, 0, 0]);
+```
+- - -
+### showLetter
+
+Displays a single text character on the LED matrix.
+
+Parameter | Type | Valid values | Explanation
+--- | --- | --- | ---
+`s` | String | A text string of length 1. | The letter to show.
+`textColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the letter. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
+`backColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
+
+Returned type | Explanation
+--- | ---
+None |
+
+```
+var sense = require("sense-hat-led").sync;
+
+
+for (var i = 10; i > 0; i--){
+    sense.showLetter(i.toString());
+    sense.sleep(0.5);
+}
+
+```
+
+async:
+
+```
+var sense = require("sense-hat-led");
+
+function flash(message) {
+  if (message.length === 0) return;
+    
+  showLetter(message[0], () => {
+    if (error) return console.error(error.message);
+    setTimeout(flash, speed * 1000, message.slice(1));
+  });
+}
+
+flash("hello");
+  
+```
