@@ -24,7 +24,7 @@ API should follow the sense hat pthon library see (http://pythonhosted.org/sense
 The synchronous functions are methods of the sync object.
 
 example:
-```
+```javascript
 "use strict";
 const sense = require("sense-hat-led").sync;
 
@@ -50,7 +50,7 @@ Returned type | Explanation
 --- | ---
 None |
 
-```
+```javascript
 var sense = require("sense-hat-led");
 
 sense.seRrotation(180);
@@ -70,7 +70,7 @@ Returned type | Explanation
 --- | ---
 Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the flipped image.
 
-```
+```javascript
 var sense = require("sense-hat-led");
 
 sense.flipH();
@@ -88,7 +88,7 @@ Returned type | Explanation
 --- | ---
 Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the flipped image.
 
-```
+```javascript
 var sense = require("sense-hat-led");
 
 sense.flipV();
@@ -106,7 +106,7 @@ Returned type | Explanation
 --- | ---
 None |
 
-```
+```javascript
 var sense = require("sense-hat-led");
 
 var X = [255, 0, 0];  // Red
@@ -132,7 +132,7 @@ Returned type | Explanation
 --- | ---
 Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the currently displayed image.
 
-```
+```javascript
 var sense = require("sense-hat-led");
 var pixelArray = sense.getPixels();
 ```
@@ -160,7 +160,7 @@ Returned type | Explanation
 --- | ---
 None |
 
-```
+```javascript
 var sense = require("sense-hat-led").sync;
 
 // examples using (x, y, r, g, b)
@@ -192,7 +192,7 @@ Returned type | Explanation
 --- | ---
 Array | Returns An array of `[R, G, B]` representing the colour of an individual LED matrix pixel at the specified X-Y coordinate.
 
-```
+```javascript
 var sense = require("sense-hat-led");
 
 var topLeftPixel = sense.getPixel(0, 0);
@@ -209,7 +209,7 @@ Parameter | Type | Valid values | Explanation
 `filePath` | String | Any valid file path. | The file system path to the image file to load.
 `redraw` | Boolean | `true` `false` | Whether or not to redraw the loaded image file on the LED matrix. Defaults to `true`
 
-```
+```javascript
 var sense = require("sense-hat-led");
 
 sense.loadImage("space_invader.png");
@@ -219,7 +219,7 @@ Returned type | Explanation
 --- | ---
 Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the loaded image after RGB conversion.
 
-```
+```javascript
 var sense = require("sense-hat-led").sync;
 
 var invaderPixels = sense.loadImage("space_invader.png", redraw=false);
@@ -237,7 +237,7 @@ Alternatively, the RGB values can be passed individually:|||
 `g` | Integer |  `0 - 255` | The Green element of the colour.
 `b` | Integer |  `0 - 255` | The Blue element of the colour.
 
-```
+```javascript
 var sense = require("sense-hat-led").sync;
 
 var red = [255, 0, 0];
@@ -262,7 +262,7 @@ Returned type | Explanation
 --- | ---
 None |
 
-```
+```javascript
 var sense = require("sense-hat-led");
 sense.showMessage("One small step for Pi!", textColour=[255, 0, 0]);
 ```
@@ -281,7 +281,7 @@ Returned type | Explanation
 --- | ---
 None |
 
-```
+```javascript
 var sense = require("sense-hat-led").sync;
 
 
@@ -294,7 +294,7 @@ for (var i = 10; i > 0; i--){
 
 async:
 
-```
+```javascript
 var sense = require("sense-hat-led");
 
 function flash(message) {
