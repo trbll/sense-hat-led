@@ -312,8 +312,8 @@ Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
 `textString` | String | Any text string. | The message to scroll.
 `scrollSpeed` | Number | Any positive number. | The speed at which the text should scroll. This value represents the time paused for between shifting the text to the left by one column of pixels. Defaults to `0.1`
-`textColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the text. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
-`backColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
+`textColour` | Array | `[R,G,B]` | An array containing the R-G-B (red, green, blue) colour of the text. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
+`backColour` | Array | `[R,G,B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
 
 Returned / callback data type | Explanation
 --- | ---
@@ -337,8 +337,8 @@ Displays a single text character on the LED matrix.
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
 `s` | String | A text string of length 1. | The letter to show.
-`textColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the letter. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
-`backColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
+`textColour` | Array | `[R,G,B]` | An array containing the R-G-B (red, green, blue) colour of the letter. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
+`backColour` | Array | `[R,G,B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
 
 Returned / callback data type | Explanation
 --- | ---
@@ -382,8 +382,8 @@ Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
 `textString` | String | Any text string. | The message to flash.
 `speed` | Number | Any number. | The speed at which the text should flash. This value represents the time paused for between letters. Defaults to `0.1`
-`textColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the text. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
-`backColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
+`textColour` | Array | `[R,G,B]` | An array containing the R-G-B (red, green, blue) colour of the text. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
+`backColour` | Array | `[R,G,B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
 
 Returned / callback data type | Explanation
 --- | ---
