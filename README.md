@@ -41,6 +41,8 @@ example:
 const sense = require("sense-hat-led").sync;
 
 sense.setPixel(0,7,[244,0,0]);
+var color = sense.getPixel(0,7);
+
 ```
 ### To Do:
 
