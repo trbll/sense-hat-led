@@ -1,6 +1,8 @@
 # Control a Raspberry Pi Sense HAT LED Display with Node
 
-Fork of Jochen Hinrichsen's sense hat library with synchronous and asynchronous methods using callbacks.  The hope is beginners can start with the synchronous and switch to callbacks & then to Jochen's promises.
+Fork of Jochen Hinrichsen's sense hat library with synchronous and asynchronous methods using node style callbacks.  The hope is beginners can start with the synchronous and switch to callbacks & then to Jochen's promises at:
+
+https://github.com/jhinrichsen/sense-hat-matrix
 
 ### Install:
 
@@ -12,14 +14,24 @@ Install the Sense HAT software by opening a Terminal window and entering the fol
 
 example:
 
-```
+```javascript
 "use strict";
 const sense = require("sense-hat-led");
 
-sense.setPixel(0,7,[244,0,0]);
+sense.setPixel(0, 7, [244,0,0], (err) => {
+  sense.getPixel(0, 7, (err, color) => {
+    console.log(color);
+  }
+});
+
+
+
+
 ```
 
-API should follow the sense hat pthon library see (http://pythonhosted.org/sense-hat/api/#led-matrix). except all methods are camelCase add callback as the last parameter of the asynchronous methods.
+API should follow the sense hat pthon library see (http://pythonhosted.org/sense-hat/api/#led-matrix). except all methods are camelCase and an added callback as the last parameter of the asynchronous methods. The callbacks are passed arguments (err, data), where data is the return value (if any) of the asynchronous version of the function.
+
+
 
 The synchronous functions are methods of the sync object.
 
@@ -46,7 +58,7 @@ Parameter | Type | Valid values | Explanation
 `r` | Integer | `0` `90` `180` `270` | The angle to rotate the LED matrix though. `0` is with the Raspberry Pi HDMI port facing downwards.
 `redraw` | Boolean | `true` `false` | Whether or not to redraw what is already being displayed on the LED matrix. Defaults to `true`
 
-Returned type | Explanation
+Returned / callback data type | Explanation
 --- | ---
 None |
 
@@ -66,7 +78,7 @@ Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
 `redraw` | Boolean | `true` `false` | Whether or not to redraw what is already being displayed on the LED matrix. Defaults to `true`
 
-Returned type | Explanation
+Returned / callback data type | Explanation
 --- | ---
 Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the flipped image.
 
@@ -84,7 +96,7 @@ Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
 `redraw` | Boolean | `true` `false` | Whether or not to redraw what is already being displayed on the LED matrix when flipped. Defaults to `true`
 
-Returned type | Explanation
+Returned / callback data type | Explanation
 --- | ---
 Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the flipped image.
 
@@ -102,7 +114,7 @@ Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
 `pixelArray` | Array | `[[R, G, B] * 64]` | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue). Each R-G-B element must be an integer between 0 and 255.
 
-Returned type | Explanation
+Returned / callback data type | Explanation
 --- | ---
 None |
 
@@ -128,14 +140,26 @@ sense.setPixels(questionMark);
 - - -
 ### getPixels
 
-Returned type | Explanation
+Returned / callback data type | Explanation
 --- | ---
 Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the currently displayed image.
 
 ```javascript
-var sense = require("sense-hat-led");
+var sense = require("sense-hat-led").sync;
+
 var pixelArray = sense.getPixels();
 ```
+
+async:
+
+```javascript
+var sense = require("sense-hat-led");
+
+sense.getPixels((err, pixelArray)=>{
+  console.log(pixelArray[0])
+});
+``
+
 
 Note: You will notice that the pixel values you pass into `setPixels` sometimes change when you read them back with  `getPixels`. This is because we specify each pixel element as 8 bit numbers (0 to 255) but when they're passed into the Linux frame buffer for the LED matrix the numbers are bit shifted down to fit into RGB 565. 5 bits for red, 6 bits for green and 5 bits for blue. The loss of binary precision when performing this conversion (3 bits lost for red, 2 for green and 3 for blue) accounts for the discrepancies you see.
 
@@ -156,7 +180,7 @@ Or three separate values for red, green and blue: |||
 `g` | Integer |  `0 - 255` | The Green element of the pixel.
 `b` | Integer |  `0 - 255` | The Blue element of the pixel.
 
-Returned type | Explanation
+Returned / callback data type | Explanation
 --- | ---
 None |
 
@@ -188,7 +212,7 @@ Parameter | Type | Valid values | Explanation
 `x` | Integer |  `0 - 7` | 0 is on the left, 7 on the right.
 `y` | Integer |  `0 - 7` | 0 is at the top, 7 at the bottom.
 
-Returned type | Explanation
+Returned / callback data type | Explanation
 --- | ---
 Array | Returns An array of `[R, G, B]` representing the colour of an individual LED matrix pixel at the specified X-Y coordinate.
 
@@ -215,7 +239,7 @@ var sense = require("sense-hat-led");
 sense.loadImage("space_invader.png");
 ```
 
-Returned type | Explanation
+Returned / callback data type | Explanation
 --- | ---
 Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the loaded image after RGB conversion.
 
@@ -224,6 +248,20 @@ var sense = require("sense-hat-led").sync;
 
 var invaderPixels = sense.loadImage("space_invader.png", redraw=false);
 ```
+
+async:
+
+```javascript
+var sense = require("sense-hat-led");
+
+sense.loadImage("space_invader.png", redraw=false (err, invaderPixels) =>{
+  console.log(invaderPixels.length);
+});
+
+
+```
+
+
 - - -
 ### clear
 
@@ -258,13 +296,19 @@ Parameter | Type | Valid values | Explanation
 `textColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the text. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
 `backColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
 
-Returned type | Explanation
+Returned / callback data type | Explanation
 --- | ---
 None |
 
 ```javascript
 var sense = require("sense-hat-led");
-sense.showMessage("One small step for Pi!", textColour=[255, 0, 0]);
+
+sense.showMessage("One small step for Pi!", textColour=[255, 0, 0], done);
+
+function done(){
+  console.log("finished message")
+}
+
 ```
 - - -
 ### showLetter
@@ -277,7 +321,7 @@ Parameter | Type | Valid values | Explanation
 `textColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the letter. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
 `backColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
 
-Returned type | Explanation
+Returned / callback data type | Explanation
 --- | ---
 None |
 
@@ -308,4 +352,52 @@ function flash(message) {
 
 flash("hello");
   
+```
+
+- - -
+### flashMessage
+
+Flashes a text message one character at a time LED matrix and at the specified speed, in the specified colour and background colour.
+
+Parameter | Type | Valid values | Explanation
+--- | --- | --- | ---
+`textString` | String | Any text string. | The message to flash.
+`scrollSpeed` | Float | Any floating point number. | The speed at which the text should scroll. This value represents the time paused for between shifting the text to the left by one column of pixels. Defaults to `0.1`
+`textColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the text. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
+`backColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
+
+Returned / callback data type | Explanation
+--- | ---
+None |
+
+```javascript
+var sense = require("sense-hat-led");
+
+sense.flashMessage("One small step for Pi!", 0.2);
+
+
+```
+
+- - -
+### sleep
+
+NOTE: Sycronous only. These calls will block execution of all JavaScript by halting Node.js' event loop!!
+
+Parameter | Type | Valid values | Explanation
+--- | --- | --- | ---
+`time` | Number | Any number. | the time in seconds to pause
+
+Returned / callback data type | Explanation
+--- | ---
+None |
+
+```javascript
+var sense = require("sense-hat-led").sync;
+
+
+function flashRed(){
+  sense.clear([255, 0, 0]);
+  sense.sleep(1);
+  sense.clear()}; 
+}
 ```
