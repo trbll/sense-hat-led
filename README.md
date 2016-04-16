@@ -411,6 +411,6 @@ var sense = require("sense-hat-led").sync;
 function flashRed(){
   sense.clear([255, 0, 0]);
   sense.sleep(1);
-  sense.clear()}; 
+  sense.clear(); 
 }
 ```
