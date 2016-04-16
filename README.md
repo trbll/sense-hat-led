@@ -318,7 +318,7 @@ None |
 ```javascript
 var sense = require("sense-hat-led");
 
-sense.showMessage("One small step for Pi!", textColour=[255, 0, 0], done);
+sense.showMessage("One small step for Pi!", [255, 0, 0], done);
 
 function done(){
   console.log("finished message")
