@@ -158,12 +158,14 @@ var sense = require("sense-hat-led");
 sense.getPixels((err, pixelArray)=>{
   console.log(pixelArray[0])
 });
-``
+```
 
 
 Note: You will notice that the pixel values you pass into `setPixels` sometimes change when you read them back with  `getPixels`. This is because we specify each pixel element as 8 bit numbers (0 to 255) but when they're passed into the Linux frame buffer for the LED matrix the numbers are bit shifted down to fit into RGB 565. 5 bits for red, 6 bits for green and 5 bits for blue. The loss of binary precision when performing this conversion (3 bits lost for red, 2 for green and 3 for blue) accounts for the discrepancies you see.
 
 The `getPixels` function provides a correct representation of how the pixels end up in frame buffer memory after you've called `setPixels`.
+
+
 - - -
 ### setPixel
 
@@ -292,7 +294,7 @@ Scrolls a text message from right to left across the LED matrix and at the speci
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
 `textString` | String | Any text string. | The message to scroll.
-`scrollSpeed` | Float | Any floating point number. | The speed at which the text should scroll. This value represents the time paused for between shifting the text to the left by one column of pixels. Defaults to `0.1`
+`scrollSpeed` | Number | Any positive number. | The speed at which the text should scroll. This value represents the time paused for between shifting the text to the left by one column of pixels. Defaults to `0.1`
 `textColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the text. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
 `backColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
 
@@ -362,7 +364,7 @@ Flashes a text message one character at a time LED matrix and at the specified s
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
 `textString` | String | Any text string. | The message to flash.
-`scrollSpeed` | Float | Any floating point number. | The speed at which the text should scroll. This value represents the time paused for between shifting the text to the left by one column of pixels. Defaults to `0.1`
+`speed` | Number | Any number. | The speed at which the text should flash. This value represents the time paused for between letters. Defaults to `0.1`
 `textColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the text. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
 `backColour` | Array | `[R, G, B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
 
