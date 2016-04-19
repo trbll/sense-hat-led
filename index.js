@@ -681,7 +681,7 @@ module.exports = {
     },
 
     set rotation(r) {
-      setRotationSync(r, false);
+      setRotationSync(r, true);
     },
   },
 };
