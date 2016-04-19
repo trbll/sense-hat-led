@@ -2,12 +2,12 @@
   "name": "sense-hat-led",
   "description": "Control your sense hat led matrix with node",
   "author": "Aonghus O Nia",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "index.js",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aonghusonia/sense-hat-matrix.git"
+    "url": "https://github.com/aonghusonia/sense-hat-led.git"
   },
   "keywords": [
     "raspberry",
@@ -16,7 +16,7 @@
     "led"
   ],
   "bugs": {
-    "url": "https://github.com/aonghusonia/sense-hat-matrix/issues"
+    "url": "https://github.com/aonghusonia/sense-hat-led/issues"
   },
-  "homepage": "https://github.com/aonghusonia/sense-hat-matrix#readme"
+  "homepage": "https://github.com/aonghusonia/sense-hat-led#readme"
 }
