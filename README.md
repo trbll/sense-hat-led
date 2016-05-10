@@ -362,7 +362,7 @@ function flash(message) {
     
   showLetter(message[0], () => {
     if (error) return console.error(error.message);
-    setTimeout(flash, speed * 1000, message.slice(1));
+    setTimeout(flash, 500, message.slice(1));
   });
 }
 
