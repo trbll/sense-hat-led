@@ -1,6 +1,6 @@
 # Control a Raspberry Pi Sense HAT LED Display with Node
 
-Fork of Jochen Hinrichsen's sense hat library with your choice of synchronous or asynchronous methods using node style callbacks.  The hope is beginners can start with the synchronous and switch to callbacks & then to Jochen's promises at:
+Fork of Jochen Hinrichsen's sense hat library see:
 
 https://github.com/jhinrichsen/sense-hat-matrix
 
@@ -26,9 +26,7 @@ sense.setPixel(0, 7, [244,0,0], (err) => {
 
 ```
 
-API should follow the sense hat pthon library see (http://pythonhosted.org/sense-hat/api/#led-matrix). except all methods are camelCase and an added callback as the last parameter of the asynchronous methods. The callbacks are passed arguments (err, data), where data is the return value (if any) of the synchronous version of the function.
-
-
+API should follow the sense hat pthon library see (http://pythonhosted.org/sense-hat/api/#led-matrix) except all methods are camelCase and an added callback as the last parameter of the asynchronous methods. The callbacks are passed arguments (err, data), where data is the return value (if any) of the synchronous version of the function. 
 
 The synchronous functions are methods of the sync object.
 
@@ -41,10 +39,10 @@ sense.setPixel(0,7,[244,0,0]);
 var color = sense.getPixel(0,7);
 
 ```
-### To Do:
 
-All of the python sense hat led matrix api has been ported except for low_light, gamma & gamma_reset those are next
+All LED Matrix methods are implemented. For sensors see nodeimu at:
 
+https://www.npmjs.com/package/nodeimu
 
 ## Sense HAT LED MATRIX API Reference
 
@@ -270,10 +268,7 @@ sense.loadImage("space_invader.png", redraw=false (err, invaderPixels) =>{
   console.log(invaderPixels.length);
 });
 
-
 ```
-
-
 - - -
 ### clear
 
@@ -362,7 +357,7 @@ function flash(message) {
     
   showLetter(message[0], () => {
     if (error) return console.error(error.message);
-    setTimeout(flash, 500, message.slice(1));
+    setTimeout(flash, speed * 1000, message.slice(1));
   });
 }
 
@@ -391,9 +386,64 @@ var sense = require("sense-hat-led");
 
 sense.flashMessage("One small step for Pi!", 0.2);
 
-
 ```
+- - -
+### lowLight
 
+Toggles the LED matrix low light mode, useful if the Sense HAT is being used in a dark environment.
+
+```javascript
+var sense = require("sense-hat-led").sync;
+
+sense.clear(255, 255, 255);
+sense.lowLight = true;
+sense.sleep(2);
+sense.lowLight = false;
+```
+- - -
+### gamma
+
+For advanced users. Most users will just need the lowLight Boolean property above. The Sense HAT API uses 8 bit (0 to 255) colours for R, G, B. When these are written to the Linux frame buffer they're bit shifted into RGB 5 6 5. The driver then converts them to RGB 5 5 5 before it passes them over to the ATTiny88 AVR for writing to the LEDs.
+
+The gamma property allows you to specify a gamma lookup table for the final 5 bits of colour used. The lookup table is a list of 32 numbers that must be between 0 and 31. The value of the incoming 5 bit colour is used to index the lookup table and the value found at that position is then written to the LEDs.
+
+Type | Valid values | Explanation
+--- | --- | --- 
+Array	| Array of length 32 containing Integers between 0 and 31 | Gamma lookup table for the final 5 bits of colour
+
+```javascript
+var sense = require("sense-hat-led").sync;
+
+sense.clear(255, 127, 0);
+console.log(sense.gamma);
+sense.sleep(2);
+
+sense.gamma = sense.gamma.reverse();
+console.log(sense.gamma);
+sense.sleep(2);
+
+sense.lowLight = true;
+console.log(sense.gamma);
+sense.sleep(2);
+
+sense.lowLight = false;
+```
+- - -
+### gammaReset
+
+A function to reset the gamma lookup table to default, ideal if you've been messing with it and want to get it back to a default state.
+
+Returned: none
+
+```javascript
+var sense = require("sense-hat-led").sync;
+
+sense.clear(255, 127, 0);
+sense.sleep(2);
+sense.gamma = new Array(32).fill(0);  // Will turn the LED matrix off
+sense.sleep(2);
+sense.gammaReset();
+```
 - - -
 ### sleep
 

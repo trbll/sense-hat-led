@@ -2,9 +2,9 @@
   "name": "sense-hat-led",
   "description": "Control your sense hat led matrix with node",
   "author": "Aonghus O Nia",
-  "version": "0.1.5",
+  "version": "1.0.0",
   "main": "index.js",
-  "engines" : { "node" : ">=5" },
+  "engines" : { "node" : ">=6" },
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -21,10 +21,11 @@
   },
   "homepage": "https://github.com/aonghusonia/sense-hat-led#readme",
 	"dependencies": {
-    "async": "*",
 		"glob": "7.0.3",
 		"pngjs": "2.3.1",
-		"sleep": "3.0.1",
-		"varg": "0.2.4"
+		"sleep": "3.0.1"
+  },
+  	"devDependencies": {
+    "async": "*"
   }
 }

@@ -36,18 +36,18 @@ let abc = 'abcdefghijklmnopqrstuvwxyz';
 
 let t = 0.2;
 
-sense.clear();
+sense.sync.clear();
 sense.sync.setRotation(180);
 
 
-sense.sync.showMessage(lst, t/10);
+sense.sync.showMessage(lst, t / 10);
 sleep(t);
 
 sense.sync.showLetter('A');
 sleep(t);
 
 
-const B = [248,252,248];
+const B = [248, 252, 248];
 
 const A = [
   O, O, O, O, O, O, O, O,
@@ -132,16 +132,41 @@ let picture = sense.sync.loadImage('./space_invader.png');
 assert.deepStrictEqual(sense.sync.getPixels(), si);
 sleep(t);
 
-sense.sync.clear();
+sense.sync.clear(255, 255, 255);
+sense.sync.lowLight = true;
+sense.sync.sleep(t);
+sense.sync.lowLight = false;
+
+sense.sync.clear(255, 127, 0);
+
+assert(sense.sync.gamma.toString() === '0,0,0,0,0,0,1,1,2,2,3,3,4,5,6,7,8,9,10,11,12,14,15,17,18,20,21,23,25,27,29,31');
+sense.sync.sleep(t);
+sense.sync.gamma = sense.sync.gamma.reverse();
+assert(sense.sync.gamma.toString() === '31,29,27,25,23,21,20,18,17,15,14,12,11,10,9,8,7,6,5,4,3,3,2,2,1,1,0,0,0,0,0,0');
+sense.sync.sleep(t);
+sense.sync.lowLight = true;
+assert(sense.sync.gamma.toString() === '0,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,3,3,3,4,4,5,5,6,6,7,7,8,8,9,10,10');
+sense.sync.sleep(t);
+sense.low_light = false;
+
+sense.sync.clear(255, 127, 0);
+sense.sync.sleep(t);
+sense.sync.gamma = new Array(32).fill(0); // Will turn the LED matrix off
+sense.sync.sleep(t);
+sense.sync.gammaReset();
+
+console.log('done sync');
 
 var async = require("async");
 
 let timeout = (callback) => setTimeout(callback, t * 1000);
 
 async.series(
-  [sense.clear,
-    (callback) => sense.setRotation(180, callback),
-    (callback) => sense.showMessage(lst, t/10, callback),
+  [(callback) => sense.clear(255, 0, 0, callback),
+    timeout,
+    sense.clear,
+    (callback) => sense.setRotation(180, true, callback),
+    (callback) => sense.showMessage(lst, t / 10, callback),
     sense.clear,
     (callback) => sense.showLetter('A', callback),
     (callback) => sense.getPixels((error, pixelList) => {
@@ -246,5 +271,3 @@ async.series(
     }
   ]
 );
-
-
