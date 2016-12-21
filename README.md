@@ -62,7 +62,7 @@ None |
 ```javascript
 var sense = require("sense-hat-led");
 
-sense.seRrotation(180);
+sense.setRotation(180);
 # alternatives
 sense.rotation = 180;
 ```
