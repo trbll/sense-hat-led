@@ -20,12 +20,13 @@
     "url": "https://github.com/aonghusonia/sense-hat-led/issues"
   },
   "homepage": "https://github.com/aonghusonia/sense-hat-led#readme",
-	"dependencies": {
-		"glob": "7.0.3",
-		"pngjs": "2.3.1",
-		"sleep": "3.0.1"
+  "dependencies": {
+    "glob": "7.0.3",
+    "pngjs": "2.3.1",
+    "sleep": "3.0.1",
+    "ioctl": "^2.0.0"
   },
-  	"devDependencies": {
+  "devDependencies": {
     "async": "*"
   }
 }
