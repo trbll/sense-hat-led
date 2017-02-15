@@ -126,8 +126,7 @@ function getPixel(x, y, callback = () => {}) {
   // Two bytes per pixel in fb memory, 16 bit RGB565
   fs.open(fb, 'r', (error, fd) => {
     fs.read(fd, Buffer.alloc(2), 0, 2, pos(x, y), (error, bytesRead, buffer) => {
-      fs.close(fd);
-      callback(error, unpack(buffer.readUInt16LE(0)));
+      fs.close(fd, error => callback(error, unpack(buffer.readUInt16LE(0))));
     });
   });
 }
@@ -171,9 +170,8 @@ function setPixel(x, y, r, g, b, callback = () => {}) {
   fs.open(fb, 'w', (error, fd) => {
     const buffer = Buffer.alloc(2);
     buffer.writeUInt16LE(pack(rgb));
-    fs.write(fd, buffer, 0, 2, pos(x, y), (error) => {
-      fs.close(fd);
-      callback(error, rgb);
+    fs.write(fd, buffer, 0, 2, pos(x, y), error => {
+      fs.close(fd, error => callback(error, rgb));
     });
   });
 }
@@ -193,9 +191,8 @@ function setPixels(pixels, callback = () => {}) {
   const buf = toBuffer(pixels);
 
   fs.open(fb, 'w', (error, fd) => {
-    fs.write(fd, buf, 0, buf.length, 0, (error) => {
-      fs.close(fd);
-      callback(error, pixels);
+    fs.write(fd, buf, 0, buf.length, 0, error => {
+      fs.close(fd, error => callback(error, pixels));
     });
   });
 }
