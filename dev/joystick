@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+var EvdevReader = require("./lib");
+
+
+var reader = new EvdevReader();
+
+reader.on("EV_KEY",function(data){
+  console.log(data);
+  const t2 = Date.now();
+  const t = data.time.tv_sec*1000 + Math.floor(data.time.tv_usec/1000);
+  console.log(t, t2, t2-t);
+}).on("error",function(e){
+  console.log("reader error : ",e);
+})
+
+
+reader.open('/dev/input/event0');

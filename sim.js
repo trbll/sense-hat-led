@@ -1,13 +1,10 @@
 'use strict';
 
-// find sense hat matrix framebuffer
-const fb = require('./findFB.js');
-
-const cb = require('./callback_fb.js')(fb);
-const p = require('./promise_fb.js')(fb);
-const sync = require('./sync_fb.js')(fb);
+const cb = require('./callback_sim.js');
+const p = require('./promise_sim.js');
+const sync = require('./sync_sim.js');
 const getAngle = require('./rotation.js').getAngle;
-const gamma = require('./gamma.js')(fb);
+const gamma = require('./gamma_sim.js');
 
 const rotation = {
   get rotation() {

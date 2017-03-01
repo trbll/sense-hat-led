@@ -4,7 +4,9 @@
   "author": "Aonghus O Nia",
   "version": "1.0.0",
   "main": "index.js",
-  "engines" : { "node" : ">=6" },
+  "engines": {
+    "node": ">=6"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -20,12 +22,18 @@
     "url": "https://github.com/aonghusonia/sense-hat-led/issues"
   },
   "homepage": "https://github.com/aonghusonia/sense-hat-led#readme",
-	"dependencies": {
-		"glob": "7.0.3",
-		"pngjs": "2.3.1",
-		"sleep": "3.0.1"
+  "dependencies": {
+    "glob": "^7.0.3",
+    "pngjs": "^2.3.1",
+    "sleep": "^3.0.1",
+    "sleep-promise": "^2.0.0",
+    "ioctl": "^2.0.0"
   },
-  	"devDependencies": {
-    "async": "*"
+  "devDependencies": {
+    "ansi": "^0.3.1",
+    "async": "*",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "mocha": "^3.1.2"
   }
 }

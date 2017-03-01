@@ -60,10 +60,10 @@ Returned / callback data type | Explanation
 None |
 
 ```javascript
-var sense = require("sense-hat-led");
+var sense = require("sense-hat-led").sync;
 
 sense.seRrotation(180);
-# alternatives
+// alternative
 sense.rotation = 180;
 ```
 - - -
@@ -80,9 +80,9 @@ Returned / callback data type | Explanation
 Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the flipped image.
 
 ```javascript
-var sense = require("sense-hat-led");
+var sense = require("sense-hat-led").sync;
 
-sense.flipH();
+var flipped = sense.flipH();
 ```
 - - -
 ### flipV
@@ -100,7 +100,7 @@ Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green,
 ```javascript
 var sense = require("sense-hat-led");
 
-sense.flipV();
+sense.flipV(false, console.log);
 ```
 - - -
 ### setPixels
@@ -119,17 +119,17 @@ None |
 var sense = require("sense-hat-led");
 
 var X = [255, 0, 0];  // Red
-var O = [255, 255, 255];  // White
+var _ = [255, 255, 255];  // White
 
 var questionMark = [
-O, O, O, X, X, O, O, O,
-O, O, X, O, O, X, O, O,
-O, O, O, O, O, X, O, O,
-O, O, O, O, X, O, O, O,
-O, O, O, X, O, O, O, O,
-O, O, O, X, O, O, O, O,
-O, O, O, O, O, O, O, O,
-O, O, O, X, O, O, O, O
+_, _, _, X, X, _, _, _,
+_, _, X, _, _, X, _, _,
+_, _, _, _, _, X, _, _,
+_, _, _, _, X, _, _, _,
+_, _, _, X, _, _, _, _,
+_, _, _, X, _, _, _, _,
+_, _, _, _, _, _, _, _,
+_, _, _, X, _, _, _, _
 ];
 
 sense.setPixels(questionMark);
@@ -152,8 +152,12 @@ async:
 ```javascript
 var sense = require("sense-hat-led");
 
-sense.getPixels((err, pixelArray)=>{
-  console.log(pixelArray[0])
+sense.getPixels(function (err, pixelArray){
+  if (err){
+    console.error(err)
+  }else{
+    console.log(pixelArray[0])
+  }
 });
 ```
 
