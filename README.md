@@ -1,8 +1,9 @@
-# Control a Raspberry Pi Sense HAT LED Display with Node
+# Control a Raspberry Pi Sense HAT LED Display with Node.js
 
-Fork of Jochen Hinrichsen's sense hat library see:
+Node module to control the [Raspberry Pi Sense HAT](https://www.raspberrypi.org/products/sense-hat/) 8x8 RGB LED matrix using javascript, used in the [Astro Pi](http://www.astro-pi.org/) mission.
+Hardware
 
-https://github.com/jhinrichsen/sense-hat-matrix
+Originally a fork of Jochen Hinrichsen's [sense-hat-matrix](https://github.com/jhinrichsen/sense-hat-matrix) library.
 
 ### Install:
 
@@ -26,7 +27,7 @@ sense.setPixel(0, 7, [244,0,0], (err) => {
 
 ```
 
-API should follow the sense hat pthon library see (http://pythonhosted.org/sense-hat/api/#led-matrix) except all methods are camelCase and an added callback as the last parameter of the asynchronous methods. The callbacks are passed arguments (err, data), where data is the return value (if any) of the synchronous version of the function. 
+API should follow the [sense hat python library](http://pythonhosted.org/sense-hat/api/#led-matrix) except all methods names are in camelCase and an added callback as the last parameter of the asynchronous methods. The callbacks are passed arguments (err, data), where data is the return value (if any) of the synchronous version of the function. 
 
 The synchronous functions are methods of the sync object.
 
@@ -40,9 +41,7 @@ var color = sense.getPixel(0,7);
 
 ```
 
-All LED Matrix methods are implemented. For sensors see nodeimu at:
-
-https://www.npmjs.com/package/nodeimu
+All LED Matrix methods are implemented. For sensors use [nodeimu](https://www.npmjs.com/package/nodeimu).
 
 ## Sense HAT LED MATRIX API Reference
 
