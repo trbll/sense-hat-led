@@ -263,7 +263,7 @@ async:
 ```javascript
 var sense = require("sense-hat-led");
 
-sense.loadImage("space_invader.png", redraw=false (err, invaderPixels) =>{
+sense.loadImage("space_invader.png", redraw=false, (err, invaderPixels) =>{
   console.log(invaderPixels.length);
 });
 
