@@ -309,6 +309,7 @@ Parameter | Type | Valid values | Explanation
 Returned / callback data type | Explanation
 --- | ---
 None |
+
 Sync:
 ```javascript
 var sense = require("sense-hat-led").sync;
