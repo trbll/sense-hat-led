@@ -309,14 +309,23 @@ Parameter | Type | Valid values | Explanation
 Returned / callback data type | Explanation
 --- | ---
 None |
+Sync:
+```javascript
+var sense = require("sense-hat-led").sync;
 
+sense.showMessage("One small step for Pi!");
+// or
+sense.showMessage("One giant leap for Pikind!", 0.2, (255,0,0), (0,255,0));
+
+```
+Async:
 ```javascript
 var sense = require("sense-hat-led");
 
-sense.showMessage("One small step for Pi!", [255, 0, 0], done);
+sense.showMessage("One small step for Pi!", 0.1, [255, 0, 0], done);
 
 function done(){
-  console.log("finished message")
+  console.log("finished message");
 }
 
 ```
