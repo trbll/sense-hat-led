@@ -302,7 +302,7 @@ Scrolls a text message from right to left across the LED matrix and at the speci
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
 `textString` | String | Any text string. | The message to scroll.
-`scrollSpeed` | Number | Any positive number. | The speed at which the text should scroll. This value represents the time paused for between shifting the text to the left by one column of pixels. Defaults to `0.1`
+`scrollSpeed` | Number | Any positive number. | The speed at which the text should scroll. This value represents the time in seconds paused for between shifting the text to the left by one column of pixels. Defaults to `0.1`
 `textColour` | Array | `[R,G,B]` | An array containing the R-G-B (red, green, blue) colour of the text. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
 `backColour` | Array | `[R,G,B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
 
@@ -382,7 +382,7 @@ Flashes a text message one character at a time LED matrix and at the specified s
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
 `textString` | String | Any text string. | The message to flash.
-`speed` | Number | Any number. | The speed at which the text should flash. This value represents the time paused for between letters. Defaults to `0.1`
+`speed` | Number | Any number. | The speed at which the text should flash. This value represents the time in seconds paused for between letters. Defaults to `0.1`
 `textColour` | Array | `[R,G,B]` | An array containing the R-G-B (red, green, blue) colour of the text. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
 `backColour` | Array | `[R,G,B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
 
