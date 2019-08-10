@@ -316,7 +316,7 @@ var sense = require("sense-hat-led").sync;
 
 sense.showMessage("One small step for Pi!");
 // or
-sense.showMessage("One giant leap for Pikind!", 0.2, (255,0,0), (0,255,0));
+sense.showMessage("One giant leap for Pikind!", 0.2, [255,0,0], [0,255,0]);
 
 ```
 Async:
