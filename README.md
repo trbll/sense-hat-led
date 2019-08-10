@@ -19,9 +19,9 @@ example:
 "use strict";
 const sense = require("sense-hat-led");
 
-sense.setPixel(0, 7, [244,0,0], (err) => {
+sense.setPixel(0, 7, [244, 0, 0], (err) => {
   sense.getPixel(0, 7, (err, color) => {
-    console.log(color);
+    console.log(color);  
   })
 });
 
@@ -36,7 +36,7 @@ example:
 "use strict";
 const sense = require("sense-hat-led").sync;
 
-sense.setPixel(0,7,[244,0,0]);
+sense.setPixel(0, 7, [244, 0, 0]);
 var color = sense.getPixel(0,7);
 
 ```
@@ -45,13 +45,13 @@ All LED Matrix methods are implemented. For sensors use [nodeimu](https://www.np
 
 ## Sense HAT LED MATRIX API Reference
 
-### setRotation
+### setRotation(r, [redraw])
 
 If you're using the Pi upside down or sideways you can use this function to correct the orientation of the image being shown.
 
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
-`r` | Integer | `0` `90` `180` `270` | The angle to rotate the LED matrix though. `0` is with the Raspberry Pi HDMI port facing downwards.
+`r` | Integer | `0` `90` `180` `270` | The angle in degrees to rotate the LED matrix though. `0` is with the Raspberry Pi HDMI port facing downwards.
 `redraw` | Boolean | `true` `false` | Whether or not to redraw what is already being displayed on the LED matrix. Defaults to `true`
 
 Returned / callback data type | Explanation
@@ -66,7 +66,7 @@ sense.setRotation(180);
 sense.rotation = 180;
 ```
 - - -
-### flipH
+### flipH([redraw])
 
 Flips the image on the LED matrix horizontally.
 
@@ -79,12 +79,12 @@ Returned / callback data type | Explanation
 Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green, blue) representing the flipped image.
 
 ```javascript
-var sense = require("sense-hat-led");
+var sense = require("sense-hat-led").sync;
 
 sense.flipH();
 ```
 - - -
-### flipV
+### flipV([redraw])
 
 Flips the image on the LED matrix vertically.
 
@@ -99,10 +99,14 @@ Array | An array containing 64 smaller arrays of `[R, G, B]` pixels (red, green,
 ```javascript
 var sense = require("sense-hat-led");
 
-sense.flipV();
+sense.flipV(false,  (err, pixelArray)=>{
+ if err return colsole.err(err);
+ console.log('Flipped Array: ');
+ console.log(pixelArray);
+}););
 ```
 - - -
-### setPixels
+### setPixels(pixelArray)
 
 Updates the entire LED matrix based on a 64 length array of pixel values.
 
@@ -134,7 +138,7 @@ O, O, O, X, O, O, O, O
 sense.setPixels(questionMark);
 ```
 - - -
-### getPixels
+### getPixels()
 
 Returned / callback data type | Explanation
 --- | ---
@@ -163,7 +167,9 @@ The `getPixels` function provides a correct representation of how the pixels end
 
 
 - - -
-### setPixel
+### setPixel(x, y, r, g b)
+or 
+### setPixel(x, y, rgb)
 
 Sets an individual LED matrix pixel at the specified X-Y coordinate to the specified colour.
 
@@ -203,7 +209,7 @@ sense.setPixel(0, 0, green);
 sense.setPixel(0, 0, blue);
 ```
 - - -
-### getPixel
+### getPixel(x, y)
 
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
@@ -233,7 +239,7 @@ sense.getPixel(0, 0 , (err, topLeftPixel)=>{
 
 Note: Please read the note under `getPixels`
 - - -
-### loadImage
+### loadImage(filePath, [redraw])
 
 Loads an image file, converts it to RGB format and displays it on the LED matrix. The image must be 8 x 8 pixels in size.
 
@@ -269,7 +275,9 @@ sense.loadImage("space_invader.png", redraw=false, (err, invaderPixels) =>{
 
 ```
 - - -
-### clear
+### clear(colour)
+or
+### clear(r,g,b)
 
 Sets the entire LED matrix to a single colour, defaults to blank / off.
 
@@ -295,7 +303,7 @@ sense.clear(red) // passing in an RGB array
 sense.clear(255, 255, 255);  // passing in r, g and b values of a colour
 ```
 - - -
-### showMessage
+### showMessage(textString, [scrollSpeed, textColour, backColour])
 
 Scrolls a text message from right to left across the LED matrix and at the specified speed, in the specified colour and background colour.
 
@@ -331,13 +339,13 @@ function done(){
 
 ```
 - - -
-### showLetter
+### showLetter(character, [textColour, backColour])
 
 Displays a single text character on the LED matrix.
 
 Parameter | Type | Valid values | Explanation
 --- | --- | --- | ---
-`s` | String | A text string of length 1. | The letter to show.
+`character` | String | A text string of length 1. | The letter to show.
 `textColour` | Array | `[R,G,B]` | An array containing the R-G-B (red, green, blue) colour of the letter. Each R-G-B element must be an integer between 0 and 255. Defaults to `[255, 255, 255]` white.
 `backColour` | Array | `[R,G,B]` | An array containing the R-G-B (red, green, blue) colour of the background. Each R-G-B element must be an integer between 0 and 255. Defaults to `[0, 0, 0]` black / off.
 
@@ -375,8 +383,8 @@ flash("hello");
 ```
 
 - - -
-### flashMessage
-
+### flashMessage(textString, [speed, textColour, backColour])
+, 
 Flashes a text message one character at a time LED matrix and at the specified speed, in the specified colour and background colour.
 
 Parameter | Type | Valid values | Explanation
@@ -438,7 +446,7 @@ sense.sleep(2);
 sense.lowLight = false;
 ```
 - - -
-### gammaReset
+### gammaReset()
 
 A function to reset the gamma lookup table to default, ideal if you've been messing with it and want to get it back to a default state.
 
@@ -454,7 +462,7 @@ sense.sleep(2);
 sense.gammaReset();
 ```
 - - -
-### sleep
+### sleep(time)
 
 NOTE: Synchronous only. These calls will block execution of all JavaScript by halting Node.js' event loop!!
 
