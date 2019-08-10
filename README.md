@@ -46,6 +46,7 @@ All LED Matrix methods are implemented. For sensors use [nodeimu](https://www.np
 ## Sense HAT LED MATRIX API Reference
 
 ### setRotation(r, [redraw])
+#### setRotation(r, [redraw], callback)
 
 If you're using the Pi upside down or sideways you can use this function to correct the orientation of the image being shown.
 
