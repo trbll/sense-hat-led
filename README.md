@@ -174,16 +174,16 @@ or
 
 Sets an individual LED matrix pixel at the specified X-Y coordinate to the specified colour.
 
-Parameter | Type | Valid values | Explanation
---- | --- | --- | ---
-`x` | Integer | `0-7` | 0 is on the left, 7 on the right.
-`y` | Integer |  `0-7` | 0 is at the top, 7 at the bottom.
-Colour can either be passed as an RGB array: |||
-`pixel` | Array |  `(r, g, b)` | Each element must be an integer between 0 and 255.
-Or three separate values for red, green and blue: |||
-`r` | Integer |  `0-255` | The Red element of the pixel.
-`g` | Integer |  `0-255` | The Green element of the pixel.
-`b` | Integer |  `0-255` | The Blue element of the pixel.
+Parameter | Type | Valid values | Explanation |
+--- | --- | --- | --- |
+`x` | Integer | `0-7` | 0 is on the left, 7 on the right. |
+`y` | Integer |  `0-7` | 0 is at the top, 7 at the bottom. |
+Colour can either be passed as an RGB array: ||||
+`pixel` | Array |  `(r, g, b)` | Each element must be an integer between 0 and 255. |
+Or three separate values for red, green and blue: ||||
+`r` | Integer |  `0-255` | The Red element of the pixel. |
+`g` | Integer |  `0-255` | The Green element of the pixel. |
+`b` | Integer |  `0-255` | The Blue element of the pixel. |
 
 Returned / callback data type | Explanation
 --- | ---
