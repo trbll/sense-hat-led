@@ -1,14 +1,24 @@
 {
-  "name": "sense-hat-led",
+  "name": "@trbll/sense-hat-led",
   "description": "Control your sense hat led matrix with node",
-  "author": "Aonghus O Nia",
-  "version": "1.0.1",
+  "author": "Tyler Bell <tyler-bell@uiowa.edu>",
+  "contributors": [
+    {
+      "name": "Tyler Bell",
+      "email": "tyler-bell@uiowa.edu"
+    },
+    {
+      "name": "Aonghus O Nia",
+      "email": ""
+    }
+  ],
+  "version": "1.0.0",
   "main": "index.js",
   "engines" : { "node" : ">=6" },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aonghusonia/sense-hat-led.git"
+    "url": "https://github.com/trbll/sense-hat-led.git"
   },
   "keywords": [
     "raspberry",
@@ -16,10 +26,6 @@
     "sense-hat",
     "led"
   ],
-  "bugs": {
-    "url": "https://github.com/aonghusonia/sense-hat-led/issues"
-  },
-  "homepage": "https://github.com/aonghusonia/sense-hat-led#readme",
   "dependencies": {
     "glob": "7.0.3",
     "pngjs": "2.3.1",
