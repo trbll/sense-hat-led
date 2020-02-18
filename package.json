@@ -23,7 +23,7 @@
   "dependencies": {
     "glob": "7.0.3",
     "pngjs": "2.3.1",
-    "sleep": "3.0.1",
+    "sleep": "6.1.0",
     "ioctl": "^2.0.0"
   },
   "devDependencies": {
