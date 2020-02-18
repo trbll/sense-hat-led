@@ -3,7 +3,11 @@
 Node module to control the [Raspberry Pi Sense HAT](https://www.raspberrypi.org/products/sense-hat/) 8x8 RGB LED matrix using javascript, used in the [Astro Pi](http://www.astro-pi.org/) mission.
 Hardware
 
-Originally a fork of Jochen Hinrichsen's [sense-hat-matrix](https://github.com/jhinrichsen/sense-hat-matrix) library.
+## Note
+
+This is a fork of aonghusonia/sense-hat-led that updates dependencies for at least Node v12.
+
+(Originally a fork of Jochen Hinrichsen's [sense-hat-matrix](https://github.com/jhinrichsen/sense-hat-matrix) library).
 
 ### Install:
 
